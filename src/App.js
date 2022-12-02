@@ -1,25 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
+import Login from "./views/CLogin";
+import Home from "./views/CHome";
+import Scan from "./views/Scan";
+import { getLoginSession } from "./utils/session";
 
-function App() {
+// const PrivateRoute = ({ children, ...restProps }) => {
+//   console.log(123);
+//   console.log(getLoginSession());
+//   const value = getLoginSession() === 1;
+//   return (
+//     <Route
+//       {...restProps}
+//       render={({ location }) => {
+//         return value ? (
+//           children
+//         ) : (
+//           <Redirect to={{ pathname: "login", from: location }}></Redirect>
+//         );
+//       }}
+//     ></Route>
+//   );
+// };
+export default () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <Login />
+          </Route>
+          <Route path="/login">
+            <Home />
+          </Route>
+          <Route path="/scan">
+            <Scan />
+          </Route>
+          <Route path="/upload">{/* <Home /> */}</Route>
+        </Switch>
+      </Router>
+    </>
   );
-}
-
-export default App;
+};
